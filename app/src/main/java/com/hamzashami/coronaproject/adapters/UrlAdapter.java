@@ -3,34 +3,26 @@ package com.hamzashami.coronaproject.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hamzashami.coronaproject.CountryDetailsActivity;
 import com.hamzashami.coronaproject.R;
-import com.hamzashami.coronaproject.model.Country;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-
-public class LinkAdapter extends RecyclerView.Adapter<LinkAdapter.MainViewHolder> {
+public class UrlAdapter extends RecyclerView.Adapter<UrlAdapter.MainViewHolder> {
     private static final String TAG = "CountryAdapter";
 
     private Context context;
     private List<String> countryList;
 
-    public LinkAdapter(Context context, List<String> countryList) {
+    public UrlAdapter(Context context, List<String> countryList) {
         this.context = context;
         this.countryList = countryList;
     }

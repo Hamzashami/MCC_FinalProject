@@ -1,7 +1,5 @@
 package com.hamzashami.coronaproject.fragments.info;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,14 +8,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -26,9 +20,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hamzashami.coronaproject.R;
-import com.hamzashami.coronaproject.adapters.LinkAdapter;
+import com.hamzashami.coronaproject.adapters.UrlAdapter;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -88,7 +81,7 @@ public class AboutFragment extends Fragment {
                 relatedLinkString = dataSnapshot.getValue(String.class);
                 links = relatedLinkString.split(",,");
                 Log.d(TAG, "onDataChange: Links " + links.length);
-                rv_linkList.setAdapter(new LinkAdapter(getContext(), Arrays.asList(links)));
+                rv_linkList.setAdapter(new UrlAdapter(getContext(), Arrays.asList(links)));
             }
 
             @Override

@@ -14,7 +14,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hamzashami.coronaproject.model.User;
 
-public class RegisterActivity extends AppCompatActivity {
+class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "RegisterActivity";
 
     private FirebaseAuth auth;

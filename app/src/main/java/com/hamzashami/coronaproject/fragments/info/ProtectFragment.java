@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hamzashami.coronaproject.R;
-import com.hamzashami.coronaproject.adapters.LinkAdapter;
 import com.hamzashami.coronaproject.adapters.SliderAdapter;
 import com.smarteist.autoimageslider.IndicatorView.draw.data.RtlMode;
 import com.smarteist.autoimageslider.SliderView;
