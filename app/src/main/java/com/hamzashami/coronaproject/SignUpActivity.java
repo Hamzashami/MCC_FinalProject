@@ -14,8 +14,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hamzashami.coronaproject.model.User;
 
-class RegisterActivity extends AppCompatActivity {
-    private static final String TAG = "RegisterActivity";
+class SignUpActivity extends AppCompatActivity {
+    private static final String TAG = "SignUpActivity";
 
     private FirebaseAuth auth;
     private FirebaseDatabase database;
@@ -86,7 +86,7 @@ class RegisterActivity extends AppCompatActivity {
 
         //create user
         auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(RegisterActivity.this, task -> {
+                .addOnCompleteListener(SignUpActivity.this, task -> {
                     Log.d(TAG, "checkRegister: createUserWithEmail:onComplete:" + task.isSuccessful());
                     if (!task.isSuccessful()) {
                         Toast.makeText(this, "Can't Register Now, Please try again later", Toast.LENGTH_SHORT).show();
@@ -96,7 +96,7 @@ class RegisterActivity extends AppCompatActivity {
                         User user = new User(userUid, name, email, username, getString(R.string.no_image));
                         userRef.child(userUid).setValue(user).addOnCompleteListener(task1 -> {
                             if (task1.isSuccessful()) {
-                                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                                startActivity(new Intent(SignUpActivity.this, MainActivity.class));
                                 finish();
                             } else {
                                 Toast.makeText(this, "Can't Register Now, Please try again later", Toast.LENGTH_SHORT).show();

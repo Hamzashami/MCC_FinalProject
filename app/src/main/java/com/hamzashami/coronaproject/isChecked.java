@@ -3,7 +3,7 @@ package com.hamzashami.coronaproject;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Validation {
+public class isChecked {
     private  Pattern pattern = Pattern.compile(android.util.Patterns.EMAIL_ADDRESS.pattern());
 
     public  boolean validateEmail(String email){

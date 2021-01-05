@@ -23,118 +23,103 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class UnitTest {
-    private final CountDownLatch latch = new CountDownLatch(4);
+    private final CountDownLatch downLatch = new CountDownLatch(3);
     JSONObject jsonObject = null;
-    boolean isLogin = false;
-    boolean isRegister = false;
-    Validation validation;
+    boolean logined = false;
+    boolean registered = false;
+    isChecked isValed;
+    String url ="https://www.countryflags.io/";
 
     @Before
     public void beforeTest() {
-        validation = new Validation();
+        isValed = new isChecked();
     }
 
     @Test
     public void login() throws InterruptedException {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, "https://tasweeeg.com/api/v1/login", null, response -> {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
             jsonObject = response;
             try {
                 if (jsonObject.getBoolean("status")) {
-                    isLogin = true;
+                    logined = true;
                 } else {
-                    isLogin = false;
+                    logined = false;
                 }
-                latch.countDown();
+                downLatch.countDown();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }, error -> {
-            isLogin = false;
-            latch.countDown();
+            logined = false;
+            downLatch.countDown();
         }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> hashMap = new HashMap<>();
-                hashMap.put("mobile", "0592471020");
-                hashMap.put("password", "123456");
-                hashMap.put("country_code", "+970");
-                return super.getParams();
-            }
         };
         Volley.newRequestQueue(appContext).add(jsonObjectRequest);
-        latch.await(10, TimeUnit.SECONDS);
+        downLatch.await(15, TimeUnit.SECONDS);
 
-        assertFalse(isLogin);
+        assertFalse(logined);
     }
 
     @Test
     public void testRegister() throws InterruptedException {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, "https://tasweeeg.com/api/v1/register", null, response -> {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
             jsonObject = response;
-            Toast.makeText(appContext, "hello", Toast.LENGTH_SHORT).show();
+            Toast.makeText(appContext, "Hi!", Toast.LENGTH_SHORT).show();
 
             try {
                 if (jsonObject.getBoolean("status")) {
-                    isRegister = true;
+                    registered = true;
                 } else {
-                    isRegister = false;
+                    registered = false;
                 }
-                latch.countDown();
+                downLatch.countDown();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }, error -> {
             Toast.makeText(appContext, error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
-            isRegister = false;
-            latch.countDown();
+            registered = false;
+            downLatch.countDown();
         }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> hashMap = new HashMap<>();
-                hashMap.put("name", "yosefmoq");
-                hashMap.put("email", "yosefmoqq@gmail.com");
-                hashMap.put("mobile", "0592247102");
-                hashMap.put("password", "123456");
-                hashMap.put("country_code", "+970");
-                return super.getParams();
-            }
+
         };
         Volley.newRequestQueue(appContext).add(jsonObjectRequest);
-        latch.await(10, TimeUnit.SECONDS);
+        downLatch.await(15, TimeUnit.SECONDS);
 
-        assertFalse(isRegister);
+        assertFalse(registered);
     }
 
     @Test
     public void isValidEmail() {
-        assertEquals(true, validation.validateEmail("shamihamza25@gmail.com"));
+        assertEquals(true, isValed.validateEmail("shamihamza25@gmail.com"));
     }
 
     @Test
     public void isValidUsername() {
-        assertEquals(false, validation.validateUsername("shamihamza25"));
+        assertEquals(true, isValed.validateUsername("shamihamza25"));
     }
 
     @Test
     public void isValidPassword() {
-        assertEquals(true, validation.validatePassword("123456"));
+        assertEquals(false, isValed.validatePassword("123456"));
     }
 
     @Test
     public void isValidConfirmPassword() {
-        assertEquals(false, validation.vaidateConfirmPassword("12345678", "1234567"));
+        assertEquals(false, isValed.vaidateConfirmPassword("123456", "1234567"));
     }
 
     @After
     public void after() {
-        validation = null;
+        isValed = null;
     }
 
 }

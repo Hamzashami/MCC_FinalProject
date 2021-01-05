@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void goToRegister() {
-        startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+        startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
     }
 
     private void checkLogin() {
