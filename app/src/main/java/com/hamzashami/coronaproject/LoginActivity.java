@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -13,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private TextInputEditText et_username, et_password;
+    private static final String TAG = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +41,13 @@ public class LoginActivity extends AppCompatActivity {
 
         findViewById(R.id.tv_register).setOnClickListener(v -> {
             goToRegister();
+            Log.d(TAG, "onCreate: isClicked");
         });
 
     }
 
     private void goToRegister() {
-        startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+        startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
     }
 
     private void checkLogin() {

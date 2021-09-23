@@ -32,9 +32,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ChatsFragment extends Fragment {
     private static final String TAG = "ChatsFragment";
 
@@ -52,7 +49,6 @@ public class ChatsFragment extends Fragment {
     private DatabaseReference messagesRef;
 
     public ChatsFragment() {
-        // Required empty public constructor
     }
 
 
@@ -75,6 +71,7 @@ public class ChatsFragment extends Fragment {
         userRef = database.getReference("users");
         messagesRef = database.getReference("messages");
 
+        Log.d(TAG, "onViewCreated: test123" + "auth" + auth + "\ndatabase" + database + "\nuserRef" + userRef + "\nmessagesRef" + messagesRef);
         rv_chats.setHasFixedSize(true);
         rv_chats.setLayoutManager(new LinearLayoutManager(getContext().getApplicationContext()));
         users = new ArrayList<>();

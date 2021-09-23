@@ -1,12 +1,12 @@
 package com.hamzashami.coronaproject;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -14,8 +14,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hamzashami.coronaproject.model.User;
 
-class SignUpActivity extends AppCompatActivity {
-    private static final String TAG = "SignUpActivity";
+public class RegisterActivity extends AppCompatActivity {
+    private static final String TAG = "RegisterActivity";
 
     private FirebaseAuth auth;
     private FirebaseDatabase database;
@@ -23,7 +23,6 @@ class SignUpActivity extends AppCompatActivity {
 
 
     private TextInputEditText et_name, et_username, et_email, et_password;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,13 +38,9 @@ class SignUpActivity extends AppCompatActivity {
         et_email = findViewById(R.id.et_email);
         et_password = findViewById(R.id.et_password);
 
-        findViewById(R.id.btn_register).setOnClickListener(v -> {
-            checkRegister();
-        });
+        findViewById(R.id.btn_register).setOnClickListener(v -> checkRegister());
 
-        findViewById(R.id.tv_goToLogin).setOnClickListener(y -> {
-            goToLogin();
-        });
+        findViewById(R.id.tv_goToLogin).setOnClickListener(y -> goToLogin());
     }
 
     private void checkRegister() {
@@ -86,7 +81,7 @@ class SignUpActivity extends AppCompatActivity {
 
         //create user
         auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(SignUpActivity.this, task -> {
+                .addOnCompleteListener(RegisterActivity.this, task -> {
                     Log.d(TAG, "checkRegister: createUserWithEmail:onComplete:" + task.isSuccessful());
                     if (!task.isSuccessful()) {
                         Toast.makeText(this, "Can't Register Now, Please try again later", Toast.LENGTH_SHORT).show();
@@ -96,10 +91,10 @@ class SignUpActivity extends AppCompatActivity {
                         User user = new User(userUid, name, email, username, getString(R.string.no_image));
                         userRef.child(userUid).setValue(user).addOnCompleteListener(task1 -> {
                             if (task1.isSuccessful()) {
-                                startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+                                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                                 finish();
                             } else {
-                                Toast.makeText(this, "Can't Register Now, Please try again later", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(this, "ERROR", Toast.LENGTH_SHORT).show();
                                 Log.d(TAG, "checkRegister: Database failed." + task.getException());
 
                             }
@@ -111,6 +106,7 @@ class SignUpActivity extends AppCompatActivity {
     }
 
     private void goToLogin() {
-        finish();
+        startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
     }
+
 }

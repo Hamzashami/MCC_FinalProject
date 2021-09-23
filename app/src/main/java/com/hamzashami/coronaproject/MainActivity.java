@@ -21,14 +21,14 @@ import com.hamzashami.coronaproject.fragments.mainFragments.UsersFragment;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-    private FirebaseAuth auth;
+    public FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        auth = FirebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
 
         ViewPager viewPager = findViewById(R.id.viewPager);
         TabLayout tabLayout = findViewById(R.id.tabLayout);

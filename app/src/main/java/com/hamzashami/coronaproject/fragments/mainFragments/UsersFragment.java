@@ -71,6 +71,8 @@ public class UsersFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         userRef = database.getReference("users");
 
+        Log.d(TAG, "onViewCreated: userRef " + userRef);
+
         rv_users.setHasFixedSize(true);
         rv_users.setLayoutManager(new LinearLayoutManager(getContext().getApplicationContext()));
         users = new ArrayList<>();
